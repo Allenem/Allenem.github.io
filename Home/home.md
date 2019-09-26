@@ -2,7 +2,7 @@
 
 ## 一、介绍
 
-这是我 Allenem 的个人博客首页，之前有试过 Hexo，有试过 Vue+Nodejs，但最终还是选择了原始的手写 HTML+CSS，理由很简单，GitPage 只支持静态页面展示和提跳转。
+这是我 Allenem 的个人博客首页，之前有试过 Hexo，有试过 Vue+Nodejs，但最终还是选择了原始的手写 HTML+CSS，理由很简单，GitPage 只支持静态页面展示和跳转。
 
 ## 二、组成
 
@@ -52,9 +52,11 @@
     ```
 - 5.大功告成。
 
-&hearts; 注意：`<a href="./xxx.html">xxx</a>` 中 `./xxx.html` 如果是外部链接需加入 `target="_blank"` ,例如： `<a target="_blank" href="./xxx.html">xxx</a>` 
+&hearts; 注意1：`<a href="./xxx.html">xxx</a>` 中 `./xxx.html` 如果是外部链接需加入 `target="_blank"` ,例如： `<a target="_blank" href="./xxx.html">xxx</a>` 
 
-## 四、最后来两张好看的照片镇楼吧
+&hearts; 注意2：`<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/allenem/mycss.css">` 可适当改为 `<link rel="stylesheet" href="../CSS/mycss.css">` 
+
+## 四、最后来两张我老婆照片镇楼
 
 ![焰灵姬5](../img/焰灵姬5.jpg)
 
