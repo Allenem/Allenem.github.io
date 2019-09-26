@@ -81,7 +81,7 @@ footer{
 }
 
 /*手机自适应*/
-@media screen and (max-width: 769px) {
+@media screen and (max-device-width: 769px) {
 
 	nav{
 		padding: 0;
