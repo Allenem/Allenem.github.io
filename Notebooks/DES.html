@@ -1,0 +1,206 @@
+
+        <html>
+        <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+        <title>GitHub Markdown CSS demo</title>
+        <link rel="shortcut icon" href="https://avatars3.githubusercontent.com/u/33366355?s=40&v=3">
+        <link rel="stylesheet" href="https://sindresorhus.com/github-markdown-css/github-markdown.css">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/allenem/mycss.css">
+        <style>
+            @media (min-width: 768px) {
+                .markdown-body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            }
+        </style>
+        </head>
+        <body>
+        <article class="markdown-body">
+          <h1 id="des-c-">DES算法的c++实现</h1>
+<blockquote>
+<p>项目地址：<a target="_blank" href="https://github.com/Allenem/introduction-of-information-security/tree/master/DES">https://github.com/Allenem/introduction-of-information-security/tree/master/DES</a></p>
+</blockquote>
+<h2 id="-">一、功能如下</h2>
+<ul>
+<li>[x] 输入1——字符串加密</li>
+<li>[x] 输入2——字符串解密</li>
+<li>[x] 输入3——对文件加密</li>
+<li>[x] 输入4——对文件解密</li>
+<li>[x] 其他任意键——退出</li>
+</ul>
+<h2 id="-des-">二、DES算法说明</h2>
+<p><a target="_blank" href="https://baike.baidu.com/item/des%E7%AE%97%E6%B3%95/10306073">参考百度百科</a></p>
+<p>DES算法把64位的明文输入块变为64位的密文输出块，它所使用的密钥也是64位，整个算法的主流程图如下：</p>
+<p><img src="./img/DES/main.png" alt="主流程图"></p>
+<h3 id="-ip-64bit-64bit-">置换规则表(IP)(64bit-&gt;64bit)</h3>
+<p>其功能是把输入的64位数据块按位重新组合，并把输出分为L0、R0两部分，每部分各长32位，其置换规则见下表：</p>
+<pre><code>58,50,42,34,26,18,10,2,60,52,44,36,28,20,12,4,
+62,54,46,38,30,22,14,6,64,56,48,40,32,24,16,8,
+57,49,41,33,25,17,9,1,59,51,43,35,27,19,11,3,
+61,53,45,37,29,21,13,5,63,55,47,39,31,23,15,7
+</code></pre><p>即将输入的第58位换到第一位，第50位换到第2位，...，依此类推，最后一位是原来的第7位。L0、R0则是换位输出后的两部分，L0是输出的左32位，R0 是右32位，例：设置换前的输入值为D1D2D3......D64，则经过初始置换后的结果为：L0=D58D50...D8；R0=D57D49...D7。</p>
+<h3 id="-ip-1-64bit-64bit-">逆置换规则表(IP^(-1))(64bit-&gt;64bit)</h3>
+<p>经过16次迭代运算后。得到L16、R16，将此作为输入，进行逆置换，即得到密文输出。逆置换正好是初始置换的逆运算。例如，第1位经过初始置换后，处于第40位，而通过逆置换，又将第40位换回到第1位，其逆置换规则如下表所示：</p>
+<pre><code>40,8,48,16,56,24,64,32,39,7,47,15,55,23,63,31,
+38,6,46,14,54,22,62,30,37,5,45,13,53,21,61,29,
+36,4,44,12,52,20,60,28,35,3,43,11,51,19,59,27,
+34,2,42,10,50,18,58 26,33,1,41,9,49,17,57,25
+</code></pre><p><img src="./img/DES/ffun.png" alt="f函数"></p>
+<h3 id="-e-32bit-48bit-">放大换位表(e盒)(32bit-&gt;48bit)</h3>
+<pre><code>32,1,2,3,4,5,4,5,6,7,8,9,8,9,10,11,
+12,13,12,13,14,15,16,17,16,17,18,19,20,21,20,21,
+22,23,24,25,24,25,26,27,28,29,28,29,30,31,32,1,
+</code></pre><h3 id="-s-48bit-32bit-">压缩功能表(s盒)(48bit-&gt;32bit)</h3>
+<p>在<code>f(Ri,Ki）</code>算法描述图中，S1,S2...S8为选择函数，其功能是把48bit数据变为32bit数据。下面给出选择函数Si(i=1,2......8）的功能表：</p>
+<pre><code>选择函数Si
+<span class="hljs-label">S1:</span>
+<span class="hljs-number">14</span>,<span class="hljs-number">4</span>,<span class="hljs-number">13</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">15</span>,<span class="hljs-number">11</span>,<span class="hljs-number">8</span>,<span class="hljs-number">3</span>,<span class="hljs-number">10</span>,<span class="hljs-number">6</span>,<span class="hljs-number">12</span>,<span class="hljs-number">5</span>,<span class="hljs-number">9</span>,<span class="hljs-number">0</span>,<span class="hljs-number">7</span>,
+<span class="hljs-number">0</span>,<span class="hljs-number">15</span>,<span class="hljs-number">7</span>,<span class="hljs-number">4</span>,<span class="hljs-number">14</span>,<span class="hljs-number">2</span>,<span class="hljs-number">13</span>,<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">6</span>,<span class="hljs-number">12</span>,<span class="hljs-number">11</span>,<span class="hljs-number">9</span>,<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,<span class="hljs-number">8</span>,
+<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,<span class="hljs-number">14</span>,<span class="hljs-number">8</span>,<span class="hljs-number">13</span>,<span class="hljs-number">6</span>,<span class="hljs-number">2</span>,<span class="hljs-number">11</span>,<span class="hljs-number">15</span>,<span class="hljs-number">12</span>,<span class="hljs-number">9</span>,<span class="hljs-number">7</span>,<span class="hljs-number">3</span>,<span class="hljs-number">10</span>,<span class="hljs-number">5</span>,<span class="hljs-number">0</span>,
+<span class="hljs-number">15</span>,<span class="hljs-number">12</span>,<span class="hljs-number">8</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">9</span>,<span class="hljs-number">1</span>,<span class="hljs-number">7</span>,<span class="hljs-number">5</span>,<span class="hljs-number">11</span>,<span class="hljs-number">3</span>,<span class="hljs-number">14</span>,<span class="hljs-number">10</span>,<span class="hljs-number">0</span>,<span class="hljs-number">6</span>,<span class="hljs-number">13</span>,
+<span class="hljs-label">S2:</span>
+<span class="hljs-number">15</span>,<span class="hljs-number">1</span>,<span class="hljs-number">8</span>,<span class="hljs-number">14</span>,<span class="hljs-number">6</span>,<span class="hljs-number">11</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">9</span>,<span class="hljs-number">7</span>,<span class="hljs-number">2</span>,<span class="hljs-number">13</span>,<span class="hljs-number">12</span>,<span class="hljs-number">0</span>,<span class="hljs-number">5</span>,<span class="hljs-number">10</span>,
+<span class="hljs-number">3</span>,<span class="hljs-number">13</span>,<span class="hljs-number">4</span>,<span class="hljs-number">7</span>,<span class="hljs-number">15</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>,<span class="hljs-number">14</span>,<span class="hljs-number">12</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">6</span>,<span class="hljs-number">9</span>,<span class="hljs-number">11</span>,<span class="hljs-number">5</span>,
+<span class="hljs-number">0</span>,<span class="hljs-number">14</span>,<span class="hljs-number">7</span>,<span class="hljs-number">11</span>,<span class="hljs-number">10</span>,<span class="hljs-number">4</span>,<span class="hljs-number">13</span>,<span class="hljs-number">1</span>,<span class="hljs-number">5</span>,<span class="hljs-number">8</span>,<span class="hljs-number">12</span>,<span class="hljs-number">6</span>,<span class="hljs-number">9</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">15</span>,
+<span class="hljs-number">13</span>,<span class="hljs-number">8</span>,<span class="hljs-number">10</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">15</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>,<span class="hljs-number">11</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">12</span>,<span class="hljs-number">0</span>,<span class="hljs-number">5</span>,<span class="hljs-number">14</span>,<span class="hljs-number">9</span>,
+<span class="hljs-label">S3:</span>
+<span class="hljs-number">10</span>,<span class="hljs-number">0</span>,<span class="hljs-number">9</span>,<span class="hljs-number">14</span>,<span class="hljs-number">6</span>,<span class="hljs-number">3</span>,<span class="hljs-number">15</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>,<span class="hljs-number">13</span>,<span class="hljs-number">12</span>,<span class="hljs-number">7</span>,<span class="hljs-number">11</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>,
+<span class="hljs-number">13</span>,<span class="hljs-number">7</span>,<span class="hljs-number">0</span>,<span class="hljs-number">9</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-number">10</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>,<span class="hljs-number">5</span>,<span class="hljs-number">14</span>,<span class="hljs-number">12</span>,<span class="hljs-number">11</span>,<span class="hljs-number">15</span>,<span class="hljs-number">1</span>,
+<span class="hljs-number">13</span>,<span class="hljs-number">6</span>,<span class="hljs-number">4</span>,<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">15</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,<span class="hljs-number">11</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">12</span>,<span class="hljs-number">5</span>,<span class="hljs-number">10</span>,<span class="hljs-number">14</span>,<span class="hljs-number">7</span>,
+<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">13</span>,<span class="hljs-number">0</span>,<span class="hljs-number">6</span>,<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">4</span>,<span class="hljs-number">15</span>,<span class="hljs-number">14</span>,<span class="hljs-number">3</span>,<span class="hljs-number">11</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>,<span class="hljs-number">12</span>,
+<span class="hljs-label">S4:</span>
+<span class="hljs-number">7</span>,<span class="hljs-number">13</span>,<span class="hljs-number">14</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,<span class="hljs-number">6</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>,<span class="hljs-number">5</span>,<span class="hljs-number">11</span>,<span class="hljs-number">12</span>,<span class="hljs-number">4</span>,<span class="hljs-number">15</span>,
+<span class="hljs-number">13</span>,<span class="hljs-number">8</span>,<span class="hljs-number">11</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">15</span>,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">7</span>,<span class="hljs-number">2</span>,<span class="hljs-number">12</span>,<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">14</span>,<span class="hljs-number">9</span>,
+<span class="hljs-number">10</span>,<span class="hljs-number">6</span>,<span class="hljs-number">9</span>,<span class="hljs-number">0</span>,<span class="hljs-number">12</span>,<span class="hljs-number">11</span>,<span class="hljs-number">7</span>,<span class="hljs-number">13</span>,<span class="hljs-number">15</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">14</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>,<span class="hljs-number">4</span>,
+<span class="hljs-number">3</span>,<span class="hljs-number">15</span>,<span class="hljs-number">0</span>,<span class="hljs-number">6</span>,<span class="hljs-number">10</span>,<span class="hljs-number">1</span>,<span class="hljs-number">13</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">11</span>,<span class="hljs-number">12</span>,<span class="hljs-number">7</span>,<span class="hljs-number">2</span>,<span class="hljs-number">14</span>,
+<span class="hljs-label">S5:</span>
+<span class="hljs-number">2</span>,<span class="hljs-number">12</span>,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,<span class="hljs-number">7</span>,<span class="hljs-number">10</span>,<span class="hljs-number">11</span>,<span class="hljs-number">6</span>,<span class="hljs-number">8</span>,<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,<span class="hljs-number">15</span>,<span class="hljs-number">13</span>,<span class="hljs-number">0</span>,<span class="hljs-number">14</span>,<span class="hljs-number">9</span>,
+<span class="hljs-number">14</span>,<span class="hljs-number">11</span>,<span class="hljs-number">2</span>,<span class="hljs-number">12</span>,<span class="hljs-number">4</span>,<span class="hljs-number">7</span>,<span class="hljs-number">13</span>,<span class="hljs-number">1</span>,<span class="hljs-number">5</span>,<span class="hljs-number">0</span>,<span class="hljs-number">15</span>,<span class="hljs-number">10</span>,<span class="hljs-number">3</span>,<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">6</span>,
+<span class="hljs-number">4</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">11</span>,<span class="hljs-number">10</span>,<span class="hljs-number">13</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">15</span>,<span class="hljs-number">9</span>,<span class="hljs-number">12</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,<span class="hljs-number">14</span>,
+<span class="hljs-number">11</span>,<span class="hljs-number">8</span>,<span class="hljs-number">12</span>,<span class="hljs-number">7</span>,<span class="hljs-number">1</span>,<span class="hljs-number">14</span>,<span class="hljs-number">2</span>,<span class="hljs-number">13</span>,<span class="hljs-number">6</span>,<span class="hljs-number">15</span>,<span class="hljs-number">0</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,
+<span class="hljs-label">S6:</span>
+<span class="hljs-number">12</span>,<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">15</span>,<span class="hljs-number">9</span>,<span class="hljs-number">2</span>,<span class="hljs-number">6</span>,<span class="hljs-number">8</span>,<span class="hljs-number">0</span>,<span class="hljs-number">13</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">14</span>,<span class="hljs-number">7</span>,<span class="hljs-number">5</span>,<span class="hljs-number">11</span>,
+<span class="hljs-number">10</span>,<span class="hljs-number">15</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>,<span class="hljs-number">7</span>,<span class="hljs-number">12</span>,<span class="hljs-number">9</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">1</span>,<span class="hljs-number">13</span>,<span class="hljs-number">14</span>,<span class="hljs-number">0</span>,<span class="hljs-number">11</span>,<span class="hljs-number">3</span>,<span class="hljs-number">8</span>,
+<span class="hljs-number">9</span>,<span class="hljs-number">14</span>,<span class="hljs-number">15</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>,<span class="hljs-number">12</span>,<span class="hljs-number">3</span>,<span class="hljs-number">7</span>,<span class="hljs-number">0</span>,<span class="hljs-number">4</span>,<span class="hljs-number">10</span>,<span class="hljs-number">1</span>,<span class="hljs-number">13</span>,<span class="hljs-number">11</span>,<span class="hljs-number">6</span>,
+<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">12</span>,<span class="hljs-number">9</span>,<span class="hljs-number">5</span>,<span class="hljs-number">15</span>,<span class="hljs-number">10</span>,<span class="hljs-number">11</span>,<span class="hljs-number">14</span>,<span class="hljs-number">1</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>,<span class="hljs-number">0</span>,<span class="hljs-number">8</span>,<span class="hljs-number">13</span>,
+<span class="hljs-label">S7:</span>
+<span class="hljs-number">4</span>,<span class="hljs-number">11</span>,<span class="hljs-number">2</span>,<span class="hljs-number">14</span>,<span class="hljs-number">15</span>,<span class="hljs-number">0</span>,<span class="hljs-number">8</span>,<span class="hljs-number">13</span>,<span class="hljs-number">3</span>,<span class="hljs-number">12</span>,<span class="hljs-number">9</span>,<span class="hljs-number">7</span>,<span class="hljs-number">5</span>,<span class="hljs-number">10</span>,<span class="hljs-number">6</span>,<span class="hljs-number">1</span>,
+<span class="hljs-number">13</span>,<span class="hljs-number">0</span>,<span class="hljs-number">11</span>,<span class="hljs-number">7</span>,<span class="hljs-number">4</span>,<span class="hljs-number">9</span>,<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">14</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">12</span>,<span class="hljs-number">2</span>,<span class="hljs-number">15</span>,<span class="hljs-number">8</span>,<span class="hljs-number">6</span>,
+<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">11</span>,<span class="hljs-number">13</span>,<span class="hljs-number">12</span>,<span class="hljs-number">3</span>,<span class="hljs-number">7</span>,<span class="hljs-number">14</span>,<span class="hljs-number">10</span>,<span class="hljs-number">15</span>,<span class="hljs-number">6</span>,<span class="hljs-number">8</span>,<span class="hljs-number">0</span>,<span class="hljs-number">5</span>,<span class="hljs-number">9</span>,<span class="hljs-number">2</span>,
+<span class="hljs-number">6</span>,<span class="hljs-number">11</span>,<span class="hljs-number">13</span>,<span class="hljs-number">8</span>,<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">10</span>,<span class="hljs-number">7</span>,<span class="hljs-number">9</span>,<span class="hljs-number">5</span>,<span class="hljs-number">0</span>,<span class="hljs-number">15</span>,<span class="hljs-number">14</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">12</span>,
+<span class="hljs-label">S8:</span>
+<span class="hljs-number">13</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-number">15</span>,<span class="hljs-number">11</span>,<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">9</span>,<span class="hljs-number">3</span>,<span class="hljs-number">14</span>,<span class="hljs-number">5</span>,<span class="hljs-number">0</span>,<span class="hljs-number">12</span>,<span class="hljs-number">7</span>,
+<span class="hljs-number">1</span>,<span class="hljs-number">15</span>,<span class="hljs-number">13</span>,<span class="hljs-number">8</span>,<span class="hljs-number">10</span>,<span class="hljs-number">3</span>,<span class="hljs-number">7</span>,<span class="hljs-number">4</span>,<span class="hljs-number">12</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">11</span>,<span class="hljs-number">0</span>,<span class="hljs-number">14</span>,<span class="hljs-number">9</span>,<span class="hljs-number">2</span>,
+<span class="hljs-number">7</span>,<span class="hljs-number">11</span>,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,<span class="hljs-number">9</span>,<span class="hljs-number">12</span>,<span class="hljs-number">14</span>,<span class="hljs-number">2</span>,<span class="hljs-number">0</span>,<span class="hljs-number">6</span>,<span class="hljs-number">10</span>,<span class="hljs-number">13</span>,<span class="hljs-number">15</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">8</span>,
+<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">14</span>,<span class="hljs-number">7</span>,<span class="hljs-number">4</span>,<span class="hljs-number">10</span>,<span class="hljs-number">8</span>,<span class="hljs-number">13</span>,<span class="hljs-number">15</span>,<span class="hljs-number">12</span>,<span class="hljs-number">9</span>,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">11</span>,
+</code></pre><p>在此以S1为例说明其功能，我们可以看到：在S1中，共有4行数据，命名为0，1、2、3行；每行有16列，命名为0、1、2、3，......，14、15列。</p>
+<p>现设输入为：D=D1D2D3D4D5D6</p>
+<p>令：行=D1D6，列=D2D3D4D5</p>
+<p>然后在S1表中查得对应的数，以4位二进制表示，此即为选择函数S1的输出。</p>
+<h3 id="-p-32bit-32bit-">单纯换位表(p盒)(32bit-&gt;32bit)</h3>
+<pre><code>16,7,20,21,29,12,28,17,1,15,23,26,5,18,31,10,
+2,8,24,14,32,27,3,9,19,13,30,6,22,11,4,25,
+</code></pre><h3 id="-">子密钥的算法</h3>
+<p>下面给出子密钥Ki（48bit）的生成算法</p>
+<p><img src="./img/DES/generateKEY.png" alt="子密钥生成算法图"></p>
+<p>从子密钥Ki的生成算法描述图中我们可以看到：初始Key值为64位，但DES算法规定，其中第8、16、......64位是奇偶校验位，不参与DES运算。故Key 实际可用位数便只有56位。即：经过缩小选择换位表1的变换后，Key 的位数由64 位变成了56位，此56位分为C0、D0两部分，各28位，然后分别进行第1次循环左移，得到C1、D1，将C1（28位）、D1（28位）合并得到56位，再经过缩小选择换位2，从而便得到了密钥K0（48位）。依此类推，便可得到K1、K2、......、K16，不过需要注意的是，16次循环左移对应的左移位数要依据下述规则进行：</p>
+<h3 id="-">循环左移位数</h3>
+<pre><code>1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1
+</code></pre><h3 id="-pc-1-64bit-56bit-">缩小选择换位表(pc-1)(64bit-&gt;56bit)</h3>
+<pre><code>57,49,41,33,25,17,9,
+1,58,50,42,34,26,18,
+10,2,59,51,43,35,27,
+19,11,3,60,52,44,36,
+63,55,47,39,31,23,15,
+7,62,54,46,38,30,22,
+14,6,61,53,45,37,29,
+21,13,5,28,20,12,4
+</code></pre><h3 id="-pc-2-56bit-48bit-">缩小选择换位表(pc-2)(56bit-&gt;48bit)</h3>
+<pre><code>14,17,11,24,1,5,
+3,28,15,6,21,10,
+23,19,12,4,26,8,
+16,7,27,20,13,2,
+41,52,31,37,47,55,
+30,40,51,45,33,48,
+44,49,39,56,34,53,
+46,42,50,36,29,32
+</code></pre><p>以上介绍了DES算法的加密过程。DES算法的解密过程是一样的，区别仅仅在于第一次迭代时用子密钥K16，第二次K15、......，最后一次用K1，算法本身并没有任何变化。</p>
+<h2 id="-">三、编程说明</h2>
+<p>看代码吧(*/ω＼*)，暂时太懒了... 我一定补回来。好的，我补回来了。</p>
+<h3 id="1-">1.函数结构</h3>
+<pre><code><span class="hljs-keyword">int</span> main()
+    ┗━━━━<span class="hljs-keyword">int</span> DES_encode_decode(<span class="hljs-keyword">string</span> m,<span class="hljs-keyword">int</span> <span class="hljs-keyword">choice</span>)
+             ┗━━━<span class="hljs-keyword">int</span> f(<span class="hljs-keyword">int</span> r[<span class="hljs-number">80</span>],<span class="hljs-keyword">int</span> kn[<span class="hljs-number">80</span>])
+</code></pre><h3 id="2-">2.参数</h3>
+<pre><code class="lang-c">pc_ip<span class="hljs-attr_selector">[65]</span>       <span class="hljs-comment">// 初始置换表</span>
+pc_ip_1<span class="hljs-attr_selector">[65]</span>     <span class="hljs-comment">// 逆初始置换表</span>
+pc_1<span class="hljs-attr_selector">[57]</span>        <span class="hljs-comment">// 生成密钥时，置换选择1，56bits</span>
+pc_2<span class="hljs-attr_selector">[49]</span>        <span class="hljs-comment">// 生成密钥时，置换选择2，48bits</span>
+pc_e<span class="hljs-attr_selector">[49]</span>        <span class="hljs-comment">// E盒扩展变换 32bits -&gt; 48bits</span>
+pc_p<span class="hljs-attr_selector">[33]</span>        <span class="hljs-comment">// P盒置换表 32bits</span>
+s_box<span class="hljs-attr_selector">[8]</span><span class="hljs-attr_selector">[4]</span><span class="hljs-attr_selector">[16]</span> <span class="hljs-comment">// S盒（s1~s8）压缩变换  48bits -&gt; 32bits</span>
+<span class="hljs-comment">/*
+** @desc    F函数包含E盒扩展、异或、S盒压缩、P盒置换
+** @param   r-右32bit，kn-加密密钥48bit
+** @output  r-运算后的右32bit
+*/</span>
+int <span class="hljs-function">f(int r[<span class="hljs-number">80</span>],int kn[<span class="hljs-number">80</span>])</span> 
+<span class="hljs-comment">/*
+** @desc    DES_encode_decode函数加解密函数
+** @param   m-要加密的明文或者要解密的密文，choice-选择加密还是解密，choice=0时是加密操作，choice=1时是解密操作
+*/</span>
+int <span class="hljs-function">DES_encode_decode(string m,int choice)</span>
+</code></pre>
+<h3 id="3-">3.详细说明</h3>
+<h4 id="f-int-r-80-int-kn-80-">f(int r[80],int kn[80])</h4>
+<ul>
+<li>STEP1.E盒扩展得到e(Ri)，用到pc_e;</li>
+<li>STEP2.异或运算得到e(Ri)^kn; (^c语言异或符号)</li>
+<li>STEP3.S盒压缩将48位分为8组，每组6位，压缩为4位，最终4×8=32位，得到S(e(Ri)^kn)，用到s_box;</li>
+<li>STEP4.P盒置换，用到pc_p</li>
+</ul>
+<h4 id="des_encode_decode-string-m-int-choice-">DES_encode_decode(string m,int choice)</h4>
+<ul>
+<li>STEP1.字符串16个hex,64bit -&gt; 16个binary,64bit;</li>
+<li>STEP2.k秘钥转2进制</li>
+<li>STEP3.生成16个子密钥，用到pc_1,pc_2</li>
+<li>STEP4.DES加密解密<ul>
+<li>STEP4.1.初始变换ip，用到pc_ip;</li>
+<li>STEP4.2.初始化得到 l[0],r[0]</li>
+<li>STEP4.3.进行16轮运算，choice=0时是加密操作，choice=1时是解密操作;</li>
+<li>STEP4.4.16轮后左右合在一起;</li>
+<li>STEP4.5.进行ip逆置换，得到最终变换，用到pc_ip_1;</li>
+<li>STEP4.6.字节转换成字符输出密文/明文，拼接到一起，方便文件读写</li>
+</ul>
+</li>
+</ul>
+<h4 id="main-">main()</h4>
+<ul>
+<li>choice==1: 每次64bit调用 DES_encode_decode 函数加密功能</li>
+<li>choice==2: 每次64bit调用 DES_encode_decode 函数解密功能</li>
+<li>choice==3: 读取文件，每次64bit调用 DES_encode_decode 函数加密功能，写入文件</li>
+<li>choice==4: 读取文件，每次64bit调用 DES_encode_decode 函数解密功能，写入文件</li>
+<li>其他任意键: 退出</li>
+</ul>
+<h3 id="4-">4.注意事项</h3>
+<p>♥ 注1：读写文件在txt文件夹中</p>
+<p>♥ 注2：暂时只实现了英文字符，数字的加密解密</p>
+<p>♥ 注3：好像<a href="main.cpp">main.cpp</a>汉字会乱码，源代码也保存到<a href="main.txt">main.txt</a>里了</p>
+<p>♥ 注4：IDE:Code::Blocks 17.12，防止乱码设置如下：Settings-&gt;Compiler settings-&gt;Other compiler options加入下面语句，utf-8不行就GBK</p>
+<pre><code><span class="hljs-attribute">-finput</span><span class="hljs-attribute">-charset</span><span class="hljs-subst">=</span>utf<span class="hljs-subst">-</span><span class="hljs-number">8</span>
+<span class="hljs-attribute">-fexec</span><span class="hljs-attribute">-charset</span><span class="hljs-subst">=</span>utf<span class="hljs-subst">-</span><span class="hljs-number">8</span>
+</code></pre><h2 id="-">四、运行截图</h2>
+<h3 id="terminal">terminal</h3>
+<p><img src="./img/DES/DES.png" alt="DES"></p>
+<h3 id="txt">txt</h3>
+<p><img src="./img/DES/txt.png" alt="txt"></p>
+
+        </article>
+        </body>
+      </html>
+    

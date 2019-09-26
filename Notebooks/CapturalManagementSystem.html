@@ -1,0 +1,577 @@
+
+        <html>
+        <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+        <title>GitHub Markdown CSS demo</title>
+        <link rel="shortcut icon" href="https://avatars3.githubusercontent.com/u/33366355?s=40&v=3">
+        <link rel="stylesheet" href="https://sindresorhus.com/github-markdown-css/github-markdown.css">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/allenem/mycss.css">
+        <style>
+            @media (min-width: 768px) {
+                .markdown-body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            }
+        </style>
+        </head>
+        <body>
+        <article class="markdown-body">
+          <h1 id="-">资金管理系统（带权限）</h1>
+<blockquote>
+<p>项目地址：<a target="_blank" href="github.com/Allenem/CapitalManagementSystem">github.com/Allenem/CapitalManagementSystem</a></p>
+</blockquote>
+<h2 id="-">目录：</h2>
+<p><a href="#一快速开始">快速开始</a></p>
+<p><a href="#二文件结构说明">文件结构说明</a></p>
+<p><a href="#三功能说明">功能说明</a></p>
+<p><a href="#四效果展示">效果展示</a></p>
+<p><a href="#五接口说明">接口说明</a></p>
+<p><a href="#附1打码过程记录">(附1)打码过程记录</a></p>
+<p><a href="#附2学习地址">(附2)视频学习地址</a></p>
+<h2 id="-">一、快速开始</h2>
+<pre><code class="lang-bash">git clone <span class="hljs-attribute">https</span>:<span class="hljs-regexp">//gi</span>thub.com/Allenem/CapitalManagementSystem.git
+
+<span class="hljs-built_in">npm</span> install
+
+<span class="hljs-built_in">npm</span> run client-install
+
+<span class="hljs-built_in">npm</span> run dev
+</code></pre>
+<p>服务端地址：<a href="http://localhost:5000">http://localhost:5000</a>, 客户端地址：<a href="http://localhost:8080">http://localhost:8080</a></p>
+<h2 id="-">二、文件结构说明</h2>
+<h3 id="1-">1.结构树</h3>
+<p>根目录下打开<code>cmd</code>或<code>powershell</code>运行<code>tree /f</code>命令生成</p>
+<pre><code>.
+│  package-lock<span class="hljs-preprocessor">.json</span>
+│  package<span class="hljs-preprocessor">.json</span>
+│  README<span class="hljs-preprocessor">.md</span>
+│  server<span class="hljs-preprocessor">.js</span>
+│
+├─client
+│  │  <span class="hljs-preprocessor">.gitignore</span>
+│  │  babel<span class="hljs-preprocessor">.config</span><span class="hljs-preprocessor">.js</span>
+│  │  package-lock<span class="hljs-preprocessor">.json</span>
+│  │  package<span class="hljs-preprocessor">.json</span>
+│  │  README<span class="hljs-preprocessor">.md</span>
+│  │  vue<span class="hljs-preprocessor">.config</span><span class="hljs-preprocessor">.js</span>
+│  │
+│  ├─public
+│  │  │  favicon<span class="hljs-preprocessor">.ico</span>
+│  │  │  index<span class="hljs-preprocessor">.html</span>
+│  │  │
+│  │  └─css
+│  │          reset<span class="hljs-preprocessor">.css</span>
+│  │
+│  └─src
+│      │  App<span class="hljs-preprocessor">.vue</span>
+│      │  http<span class="hljs-preprocessor">.js</span>
+│      │  main<span class="hljs-preprocessor">.js</span>
+│      │  router<span class="hljs-preprocessor">.js</span>
+│      │  store<span class="hljs-preprocessor">.js</span>
+│      │
+│      ├─assets
+│      │      <span class="hljs-number">403.</span>png
+│      │      <span class="hljs-number">404.</span>gif
+│      │      bg<span class="hljs-preprocessor">.jpg</span>
+│      │      coin<span class="hljs-preprocessor">.png</span>
+│      │      showcase<span class="hljs-preprocessor">.jpg</span>
+│      │
+│      ├─components
+│      │      Dialog<span class="hljs-preprocessor">.vue</span>
+│      │      HeadNav<span class="hljs-preprocessor">.vue</span>
+│      │      LeftMenu<span class="hljs-preprocessor">.vue</span>
+│      │
+│      └─views
+│              <span class="hljs-number">404.</span>vue
+│              ChangeList<span class="hljs-preprocessor">.vue</span>
+│              FundList<span class="hljs-preprocessor">.vue</span>
+│              Home<span class="hljs-preprocessor">.vue</span>
+│              Index<span class="hljs-preprocessor">.vue</span>
+│              InfoShow<span class="hljs-preprocessor">.vue</span>
+│              Login<span class="hljs-preprocessor">.vue</span>
+│              Register<span class="hljs-preprocessor">.vue</span>
+│              UserList<span class="hljs-preprocessor">.vue</span>
+│
+├─config
+│      keys<span class="hljs-preprocessor">.js</span>
+│      passport<span class="hljs-preprocessor">.js</span>
+│
+├─effectImg
+│      ……
+│
+├─models
+│      Profile<span class="hljs-preprocessor">.js</span>
+│      User<span class="hljs-preprocessor">.js</span>
+│
+└─routers
+    └─api
+            profiles<span class="hljs-preprocessor">.js</span>
+            users<span class="hljs-preprocessor">.js</span>
+</code></pre><h3 id="2-">2.结构说明</h3>
+<h4 id="-">①后端文件</h4>
+<p>主文件</p>
+<p><code>server.js</code></p>
+<p>两个模型</p>
+<p><code>models/Profile.js</code></p>
+<p><code>models/User.js</code></p>
+<p>路由配置</p>
+<p><code>routers/api/profiles.js</code></p>
+<p><code>routers/api/users.js</code></p>
+<p>常量和token验证</p>
+<p><code>config/key</code></p>
+<p><code>config/passport</code></p>
+<h4 id="-">②前端文件</h4>
+<p>vue默认配置</p>
+<p><code>client/vue.config.js</code></p>
+<p>入口文件</p>
+<p><code>client/public/index.html</code></p>
+<p>根组件</p>
+<p><code>client/src/App.vue</code></p>
+<p>路由配置</p>
+<p><code>client/src/router.js</code></p>
+<p>库的引用</p>
+<p><code>client/src/main.js</code></p>
+<p>loading，请求拦截，响应拦截</p>
+<p><code>client/src/http.js</code></p>
+<p>vuex存储</p>
+<p><code>client/src/store.js</code></p>
+<p>静态文件夹</p>
+<p><code>client/src/assets</code></p>
+<p>页面文件夹</p>
+<p><code>client/src/views</code></p>
+<p>组件文件夹</p>
+<p><code>client/src/components</code></p>
+<h2 id="-">三、功能说明</h2>
+<ul>
+<li>[x] 后端users接口配置（注册、登录、获取）</li>
+<li>[x] 后端profilss接口配置（查询全部，查询单个，增，改，删）</li>
+<li>[x] 注册页面</li>
+<li>[x] 登录页面</li>
+<li>[x] 主页页面</li>
+<li>[x] 资金流水页面</li>
+<li>[ ] 修改记录页面</li>
+<li>[x] 个人信息页面</li>
+<li>[x] 全员信息页面</li>
+<li>[x] 404页面</li>
+</ul>
+<h2 id="-">四、效果展示</h2>
+<p><strong>test无身份，all为管理员</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/register.png" alt="register"></th>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/login.png" alt="login"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">注册页</td>
+<td style="text-align:center">登录页</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/home.png" alt="home"></th>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/employeefundlist.png" alt="employeefundlist"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">主页</td>
+<td style="text-align:center">非管理员资金流水页</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/employeefundlistsearch.png" alt="employeefundlistsearch"></th>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/changelist.png" alt="changelist"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">非管理员资金流水页筛选</td>
+<td style="text-align:center">非管理员修改记录</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/notmanagerinfoshow.png" alt="notmanagerinfoshow"></th>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/employeeuserlist.png" alt="employeeuserlist"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">非管理员个人信息页</td>
+<td style="text-align:center">非管理员全员信息页</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/managerfundlist5items.png" alt="managerfundlist5items"></th>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/managerfundlist10items.png" alt="managerfundlist10items"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">管理员资金流水页 5items/page</td>
+<td style="text-align:center">管理员资金流水页 10items/page</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/managerfundlistedit.png" alt="managerfundlistedit"></th>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/managerinfoshow.png" alt="managerinfoshow"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">管理员资金流水页编辑</td>
+<td style="text-align:center">管理员个人信息页</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/manageruserlist.png" alt="manageruserlist"></th>
+<th style="text-align:center"><img src="https://github.com/Allenem/CapitalManagementSystem/raw/master/effectImg/manageruserlistsearch.png" alt="manageruserlistsearch"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">管理员全员信息页</td>
+<td style="text-align:center">管理员全员信息筛选</td>
+</tr>
+</tbody>
+</table>
+<h2 id="-">五、接口说明</h2>
+<h3 id="-">用户部分</h3>
+<h4 id="1-users-">1.users数据库测试</h4>
+<pre><code class="lang-json">接口地址：<span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/localhost:5000/api</span><span class="hljs-regexp">/users/test</span>
+请求方式：get
+请求示例：<span class="hljs-constant">Examples</span>
+接口参数：
+<span class="hljs-number">1</span>.请求参数说明：
+{
+
+}
+<span class="hljs-number">2</span>.返回参数说明：
+{
+  <span class="hljs-string">"msg"</span><span class="hljs-symbol">:<span class="hljs-string">"users test api works"</span></span>
+}
+</code></pre>
+<h4 id="2-">2.用户注册</h4>
+<pre><code class="lang-json">接口地址：<span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/localhost:5000/api</span><span class="hljs-regexp">/users/register</span>
+请求方式：post
+请求示例：<span class="hljs-constant">Examples</span>
+接口参数：
+<span class="hljs-number">1</span>.请求参数说明：
+{
+  <span class="hljs-string">"name"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"test"</span>,
+  <span class="hljs-string">"email"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"test@test.com"</span>,
+  <span class="hljs-string">"password"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"123456"</span>,
+  <span class="hljs-string">"identity"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"manager"</span>
+}
+<span class="hljs-number">2</span>.返回参数说明：
+{
+  <span class="hljs-string">"name"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"test"</span>,
+  <span class="hljs-string">"email"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"test@test.com"</span>,
+  <span class="hljs-string">"avatar"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"xxx"</span>,
+  <span class="hljs-string">"password"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"123456"</span>,
+  <span class="hljs-string">"identity"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"manager"</span>
+}
+</code></pre>
+<h4 id="3-">3.用户登录</h4>
+<pre><code class="lang-json">接口地址：<span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/localhost:5000/api</span><span class="hljs-regexp">/users/login</span>
+请求方式：post
+请求示例：<span class="hljs-constant">Examples</span>
+接口参数：
+返回参数说明：
+<span class="hljs-number">1</span>.请求参数说明：
+{
+  <span class="hljs-string">"email"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"test@test.com"</span>, 
+  <span class="hljs-string">"password"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"123456"</span>,
+}
+<span class="hljs-number">2</span>.返回参数说明：
+{
+  <span class="hljs-string">"success"</span><span class="hljs-symbol">:</span> <span class="hljs-keyword">true</span>,
+  <span class="hljs-string">"token"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"'Bearer'  + token"</span>
+}
+</code></pre>
+<h4 id="4-">4.获取当前用户</h4>
+<pre><code class="lang-json">接口地址：<span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/localhost:5000/api</span><span class="hljs-regexp">/users/current</span>
+请求方式：get
+请求示例：<span class="hljs-constant">Examples</span>
+接口参数：
+返回参数说明：
+<span class="hljs-number">1</span>.请求参数说明：
+{
+
+}
+<span class="hljs-number">2</span>.返回参数说明：
+{
+  <span class="hljs-string">"id"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"qwertyuiopasdfghjklcvbnm"</span>,
+  <span class="hljs-string">"name"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"test"</span>,
+  <span class="hljs-string">"email"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"test@test.com"</span>,
+  <span class="hljs-string">"identity"</span><span class="hljs-symbol">:</span> <span class="hljs-string">"manager"</span>
+}
+</code></pre>
+<h4 id="5-">5.获取所有用户信息</h4>
+<pre><code class="lang-json">接口地址：http:<span class="hljs-regexp">//localhost</span>:<span class="hljs-number">5000</span>/api/users/
+请求方式：get
+请求示例：Examples
+接口参数：
+返回参数说明：
+<span class="hljs-number">1</span>.请求参数说明：
+{
+
+}
+<span class="hljs-number">2</span>.返回参数说明：
+{
+<span class="hljs-string">"user"</span>:
+[
+    {
+        <span class="hljs-string">"_id"</span>: <span class="hljs-string">"5d320d3bb77a763724d503d9"</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"test"</span>,
+        <span class="hljs-string">"email"</span>: <span class="hljs-string">"test<span class="hljs-variable">@gmail</span>.com"</span>,
+        <span class="hljs-string">"avatar"</span>: <span class="hljs-string">"//www.gravatar.com/avatar/1aedb8d9dc4751e229a335e371db8058?s=200&amp;r=pg&amp;d=mm"</span>,
+        <span class="hljs-string">"password"</span>: <span class="hljs-string">"<span class="hljs-variable">$2</span>b<span class="hljs-variable">$1</span>0<span class="hljs-variable">$TBjcpQBI2hsXfZMB5DKzXuQBeevJI7mc7GuootkbwscUT9A</span>/wiI6S"</span>,
+        <span class="hljs-string">"date"</span>: <span class="hljs-string">"2019-07-19T18:34:35.489Z"</span>,
+        <span class="hljs-string">"__v"</span>: <span class="hljs-number">0</span>
+    },
+    {
+        <span class="hljs-string">"_id"</span>: <span class="hljs-string">"5d32b28ae6b23dcb8dd4f727"</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"abc"</span>,
+        <span class="hljs-string">"email"</span>: <span class="hljs-string">"abc<span class="hljs-variable">@abc</span>.com"</span>,
+        <span class="hljs-string">"avatar"</span>: <span class="hljs-string">"//www.gravatar.com/avatar/4adcca49b3b1e5a08ac202f5d5a9e688?s=200&amp;r=pg&amp;d=mm"</span>,
+        <span class="hljs-string">"password"</span>: <span class="hljs-string">"<span class="hljs-variable">$2</span>b<span class="hljs-variable">$1</span>0<span class="hljs-variable">$TFjKmx0vtwbDjQMr6R0kNeQ</span>/jQvDLzCksDPXebDBJyykahun7Cnhi"</span>,
+        <span class="hljs-string">"identity"</span>: <span class="hljs-string">"employee"</span>,
+        <span class="hljs-string">"date"</span>: <span class="hljs-string">"2019-07-20T06:19:54.158Z"</span>,
+        <span class="hljs-string">"__v"</span>: <span class="hljs-number">0</span>
+    }
+]
+}
+</code></pre>
+<h3 id="-">资金流水部分</h3>
+<h4 id="1-profiles-">1.profiles数据库测试</h4>
+<pre><code class="lang-json">接口地址：<span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/localhost:5000/api</span><span class="hljs-regexp">/profiles/test</span>
+请求方式：get
+请求示例：<span class="hljs-constant">Examples</span>
+接口参数：
+<span class="hljs-number">1</span>.请求参数说明：
+{
+
+}
+<span class="hljs-number">2</span>.返回参数说明：
+{
+  <span class="hljs-string">"msg"</span><span class="hljs-symbol">:<span class="hljs-string">"profiles test api works"</span></span>
+}
+</code></pre>
+<h4 id="2-">2.资金流水添加</h4>
+<pre><code class="lang-json">接口地址：<span class="hljs-keyword">http</span>://localhost:<span class="hljs-number">5000</span>/api/profiles/<span class="hljs-built_in">add</span>
+请求方式：<span class="hljs-built_in">post</span>
+请求示例：Examples
+接口参数：
+返回参数说明：
+<span class="hljs-number">1.</span>请求参数说明：
+{
+  <span class="hljs-string">"type"</span>:<span class="hljs-string">"优惠券"</span>,
+  <span class="hljs-string">"describe"</span>:<span class="hljs-string">"买书"</span>,
+  <span class="hljs-string">"income"</span>:<span class="hljs-string">"30"</span>,
+  <span class="hljs-string">"expend"</span>:<span class="hljs-string">"20"</span>,
+  <span class="hljs-string">"cash"</span>:<span class="hljs-string">"10"</span>,
+  <span class="hljs-string">"remark"</span>:<span class="hljs-string">"开心"</span>
+}
+<span class="hljs-number">2.</span>返回参数说明：
+{
+  <span class="hljs-string">"type"</span>:<span class="hljs-string">"优惠券"</span>,
+  <span class="hljs-string">"describe"</span>:<span class="hljs-string">"买书"</span>,
+  <span class="hljs-string">"income"</span>:<span class="hljs-string">"30"</span>,
+  <span class="hljs-string">"expend"</span>:<span class="hljs-string">"20"</span>,
+  <span class="hljs-string">"cash"</span>:<span class="hljs-string">"10"</span>,
+  <span class="hljs-string">"remark"</span>:<span class="hljs-string">"开心"</span>
+}
+</code></pre>
+<h4 id="3-">3.资金流水获取全部</h4>
+<pre><code class="lang-json">接口地址：<span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/localhost:5000/api</span><span class="hljs-regexp">/profiles/</span>
+请求方式：get
+请求示例：<span class="hljs-constant">Examples</span>
+接口参数：
+返回参数说明：
+<span class="hljs-number">1</span>.请求参数说明：
+{
+
+}
+<span class="hljs-number">2</span>.返回参数说明：
+{
+  <span class="hljs-string">"profile"</span><span class="hljs-symbol">:</span>
+  [
+    {
+      <span class="hljs-string">"type"</span><span class="hljs-symbol">:<span class="hljs-string">"优惠券"</span></span>,
+      <span class="hljs-string">"describe"</span><span class="hljs-symbol">:<span class="hljs-string">"买书"</span></span>,
+      <span class="hljs-string">"income"</span><span class="hljs-symbol">:<span class="hljs-string">"30"</span></span>,
+      <span class="hljs-string">"expend"</span><span class="hljs-symbol">:<span class="hljs-string">"20"</span></span>,
+      <span class="hljs-string">"cash"</span><span class="hljs-symbol">:<span class="hljs-string">"10"</span></span>,
+      <span class="hljs-string">"remark"</span><span class="hljs-symbol">:<span class="hljs-string">"开心"</span></span>
+    },
+    {
+      <span class="hljs-string">"type"</span><span class="hljs-symbol">:<span class="hljs-string">"礼券"</span></span>,
+      <span class="hljs-string">"describe"</span><span class="hljs-symbol">:<span class="hljs-string">"充值"</span></span>,
+      <span class="hljs-string">"income"</span><span class="hljs-symbol">:<span class="hljs-string">"50"</span></span>,
+      <span class="hljs-string">"expend"</span><span class="hljs-symbol">:<span class="hljs-string">"20"</span></span>,
+      <span class="hljs-string">"cash"</span><span class="hljs-symbol">:<span class="hljs-string">"30"</span></span>,
+      <span class="hljs-string">"remark"</span><span class="hljs-symbol">:<span class="hljs-string">"好开心"</span></span>
+    }
+  ]
+}
+</code></pre>
+<h4 id="4-">4.资金流水获取单个</h4>
+<pre><code class="lang-json">接口地址：<span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/localhost:5000/api</span><span class="hljs-regexp">/profiles/id</span>
+请求方式：get
+请求示例：<span class="hljs-constant">Examples</span>
+接口参数：
+返回参数说明：
+<span class="hljs-number">1</span>.请求参数说明：
+{
+  <span class="hljs-string">"id"</span><span class="hljs-symbol">:<span class="hljs-string">"5d320d3bb77a763724d503d9"</span></span>
+}
+<span class="hljs-number">2</span>.返回参数说明：
+{
+  <span class="hljs-string">"_id"</span><span class="hljs-symbol">:<span class="hljs-string">"5d320d3bb77a763724d503d9"</span></span>,
+  <span class="hljs-string">"type"</span><span class="hljs-symbol">:<span class="hljs-string">"优惠券"</span></span>,
+  <span class="hljs-string">"describe"</span><span class="hljs-symbol">:<span class="hljs-string">"买书"</span></span>,
+  <span class="hljs-string">"income"</span><span class="hljs-symbol">:<span class="hljs-string">"30"</span></span>,
+  <span class="hljs-string">"expend"</span><span class="hljs-symbol">:<span class="hljs-string">"20"</span></span>,
+  <span class="hljs-string">"cash"</span><span class="hljs-symbol">:<span class="hljs-string">"10"</span></span>,
+  <span class="hljs-string">"remark"</span><span class="hljs-symbol">:<span class="hljs-string">"开心"</span></span>
+}
+</code></pre>
+<h4 id="5-">5.资金流水编辑</h4>
+<pre><code class="lang-json">接口地址：<span class="hljs-keyword">http</span>://localhost:<span class="hljs-number">5000</span>/api/profiles/edit/id
+请求方式：<span class="hljs-built_in">post</span>
+请求示例：Examples
+接口参数：
+返回参数说明：
+<span class="hljs-number">1.</span>请求参数说明：
+{
+  <span class="hljs-string">"type"</span>:<span class="hljs-string">"优惠券"</span>,
+  <span class="hljs-string">"describe"</span>:<span class="hljs-string">"买书"</span>,
+  <span class="hljs-string">"income"</span>:<span class="hljs-string">"30"</span>,
+  <span class="hljs-string">"expend"</span>:<span class="hljs-string">"20"</span>,
+  <span class="hljs-string">"cash"</span>:<span class="hljs-string">"10"</span>,
+  <span class="hljs-string">"remark"</span>:<span class="hljs-string">"开心"</span>
+}
+<span class="hljs-number">2.</span>返回参数说明：
+{
+  <span class="hljs-string">"type"</span>:<span class="hljs-string">"优惠券"</span>,
+  <span class="hljs-string">"describe"</span>:<span class="hljs-string">"买书"</span>,
+  <span class="hljs-string">"income"</span>:<span class="hljs-string">"30"</span>,
+  <span class="hljs-string">"expend"</span>:<span class="hljs-string">"20"</span>,
+  <span class="hljs-string">"cash"</span>:<span class="hljs-string">"10"</span>,
+  <span class="hljs-string">"remark"</span>:<span class="hljs-string">"开心"</span>
+}
+</code></pre>
+<h4 id="6-">6.资金流水删除</h4>
+<pre><code class="lang-json">接口地址：<span class="hljs-keyword">http</span>://localhost:<span class="hljs-number">5000</span>/api/profiles/<span class="hljs-built_in">delete</span>/id
+请求方式：<span class="hljs-built_in">delete</span>
+请求示例：Examples
+接口参数：
+返回参数说明：
+<span class="hljs-number">1.</span>请求参数说明：
+{
+  <span class="hljs-string">"id"</span>:<span class="hljs-string">"5d320d3bb77a763724d503d9"</span>
+}
+<span class="hljs-number">2.</span>返回参数说明：
+{
+  <span class="hljs-string">"_id"</span>:<span class="hljs-string">"5d320d3bb77a763724d503d9"</span>,
+  <span class="hljs-string">"type"</span>:<span class="hljs-string">"优惠券"</span>,
+  <span class="hljs-string">"describe"</span>:<span class="hljs-string">"买书"</span>,
+  <span class="hljs-string">"income"</span>:<span class="hljs-string">"30"</span>,
+  <span class="hljs-string">"expend"</span>:<span class="hljs-string">"20"</span>,
+  <span class="hljs-string">"cash"</span>:<span class="hljs-string">"10"</span>,
+  <span class="hljs-string">"remark"</span>:<span class="hljs-string">"开心"</span>
+}<span class="hljs-comment">
+//已删除的信息</span>
+</code></pre>
+<h2 id="-1-">（附1）打码过程记录</h2>
+<h3 id="1-nodejs-express-">1.后端接口配置（nodejs, express)</h3>
+<p><code>npm install nodemon -g</code> 全局安装nodemon避免重复启动服务器</p>
+<p><code>npm i mongoose</code> 安装mangooose</p>
+<p><a target="_blank" href="https://cloud.mongodb.com">MongoDB Atlas</a> 官网免费注册申请 MongoDB Atlas 云数据库</p>
+<p><a target="_blank" href="https://www.getpostman.com/downloads/">postman</a> 下载安装软件进行接口测试</p>
+<p><code>npm i body-parser</code> 安装body-parser发post请求</p>
+<p><code>npm i bcrypt</code> 加密</p>
+<p><code>npm i gravatar</code> 头像，可到<a target="_blank" href="https://en.gravatar.com/注册上传头像">https://en.gravatar.com/注册上传头像</a></p>
+<p><code>npm i jsonwebtoken</code> 登录成功返回token，token可以理解为一个令牌或者一个钥匙</p>
+<p><code>npm install passport-jwt passport</code> 验证token</p>
+<h3 id="2-vue-cli-3-9-3-element-ui-">2.前端页面书写（vue-cli 3.9.3, element-ui)</h3>
+<p><code>npm install -g @vue/cli-service-global</code> 全局安装最新的vue-cli</p>
+<p>总文件目录下运行 <code>npm i concurrently</code> 前后端连载，不用分步开启服务，配置如下：</p>
+<p>配置前端 <code>client/package.json</code> 的 <code>"scripts"</code></p>
+<pre><code class="lang-json">  <span class="hljs-string">"scripts"</span>: {
+    <span class="hljs-string">"serve"</span>: <span class="hljs-string">"vue-cli-service serve"</span>,
+    <span class="hljs-string">"build"</span>: <span class="hljs-string">"vue-cli-service build"</span>,
+    <span class="hljs-string">"start"</span>: <span class="hljs-string">"npm run serve"</span>
+  },
+</code></pre>
+<p>配置总文件 <code>package.json</code> 的 <code>"scripts"</code></p>
+<pre><code class="lang-json">  <span class="hljs-string">"scripts"</span>: {
+    <span class="hljs-string">"client-install"</span>: <span class="hljs-string">"npm install --prefix client"</span>,
+    <span class="hljs-string">"client"</span>: <span class="hljs-string">"npm start --prefix client"</span>,
+    <span class="hljs-string">"start"</span>: <span class="hljs-string">"node server.js"</span>,
+    <span class="hljs-string">"server"</span>: <span class="hljs-string">"nodemon server.js"</span>,
+    <span class="hljs-string">"dev"</span>: <span class="hljs-string">"concurrently \"</span>npm run <span class="hljs-built_in">server</span>\<span class="hljs-string">" \"</span>npm run client\<span class="hljs-string">""</span>
+  },
+</code></pre>
+<p>总文件目录下运行 <code>npm run dev</code> 实现前后端服务同时开启</p>
+<p><code>npm i jwt-decode -S</code> 解析token模块</p>
+<p><code>npm i axios -S</code> 请求工具axios</p>
+<p><code>npm i element-ui -S</code> 安装element-ui组件</p>
+<p>用到其 </p>
+<ul>
+<li>Message 消息提示</li>
+<li>Loading 加载</li>
+<li>NavMenu 导航菜单</li>
+<li>Table 表格</li>
+<li>Form 表单</li>
+<li>Pagination 分页</li>
+<li>DateTimePicker 日期时间选择器</li>
+<li>Icon 图标</li>
+<li>MessageBox 弹框 </li>
+</ul>
+<p>等等</p>
+<p>引入 <code>font-awesome</code> 图库</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 示例 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">i</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"fa fa-margin fa-server fa-2x"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">i</span>&gt;</span>
+</code></pre>
+<h2 id="-2-">（附2）学习地址</h2>
+<p>腾讯课堂：<a target="_blank" href="https://ke.qq.com/course/391846">https://ke.qq.com/course/391846</a></p>
+<p>网易课堂：<a target="_blank" href="https://study.163.com/course/introduction/1209227821.htm">https://study.163.com/course/introduction/1209227821.htm</a></p>
+<p>B站地址：</p>
+<p><a target="_blank" href="https://www.bilibili.com/video/av59056478，">https://www.bilibili.com/video/av59056478，</a>
+<a target="_blank" href="https://www.bilibili.com/video/av55896464，">https://www.bilibili.com/video/av55896464，</a>
+<a target="_blank" href="https://www.bilibili.com/video/av53141006，">https://www.bilibili.com/video/av53141006，</a>
+<a target="_blank" href="https://www.bilibili.com/video/av54125678，">https://www.bilibili.com/video/av54125678，</a>
+<a target="_blank" href="https://www.bilibili.com/video/av44940777">https://www.bilibili.com/video/av44940777</a></p>
+
+        </article>
+        </body>
+      </html>
+    

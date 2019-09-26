@@ -1,0 +1,69 @@
+
+        <html>
+        <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+        <title>GitHub Markdown CSS demo</title>
+        <link rel="shortcut icon" href="https://avatars3.githubusercontent.com/u/33366355?s=40&v=3">
+        <link rel="stylesheet" href="https://sindresorhus.com/github-markdown-css/github-markdown.css">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/allenem/mycss.css">
+        <style>
+            @media (min-width: 768px) {
+                .markdown-body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            }
+        </style>
+        </head>
+        <body>
+        <article class="markdown-body">
+          <h1 id="allenem-">Allenem 的博客主页</h1>
+<h2 id="-">一、介绍</h2>
+<p>这是我 Allenem 的个人博客首页，之前有试过 Hexo，有试过 Vue+Nodejs，但最终还是选择了原始的手写 HTML+CSS，理由很简单，GitPage 只支持静态页面展示和提跳转。</p>
+<h2 id="-">二、组成</h2>
+<p>我的博客主要有以下几个方面组成：</p>
+<ul>
+<li>主页</li>
+<li>博文</li>
+<li>项目</li>
+<li>关于</li>
+</ul>
+<h3 id="1-">1.主页</h3>
+<p>简单介绍一下我这个项目。</p>
+<h3 id="2-">2.博文</h3>
+<p>博文就是我学习的一些笔记。</p>
+<p>暂时设定包含 HTML， CSS， JavaScript， Vue， React， Nodejs， Git相关， Java， Python， CV， NL， 学校课程学习记录，一些小技巧 等等吧。</p>
+<h3 id="3-">3.项目</h3>
+<p>贴出一些我的项目仓库地址和简介。</p>
+<h3 id="4-">4.关于</h3>
+<p>我的个人简介。</p>
+<h2 id="-">三、该博客项目简介</h2>
+<p>本博客是静态网页，没有前后端交互功能，仅仅作笔记展示使用。</p>
+<p>使用步骤如下，方便以后指导自己如何新添心得笔记：</p>
+<ul>
+<li>1.在 <code>./Notebooks</code> 文件夹下新建 <code>markdown</code> 文件；</li>
+<li>2.拷贝文章内容，粘贴到<a href="https://allenem.github.io/md2HtmlOrPdf/index.html">该网址</a> 的 <code>input Markdown content</code> 区域，点击 <button>下载html</button> ；</li>
+<li>3.将下载的 <code>index.html</code> 文件改名 <code>xxx.html</code> 移动到 <code>./Notebooks</code> 目录下;</li>
+<li><p>4.在 <code>./Notebooks/index.html</code> 的代码段①下面添加代码段②:</p>
+<p>  代码段①</p>
+<pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"./index.html"</span>&gt;</span>目录<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+</code></pre>
+<p>  代码段①</p>
+<pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"./xxx.html"</span>&gt;</span>xxx<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+</code></pre>
+</li>
+<li>5.大功告成。</li>
+</ul>
+<p>♥ 注意：<code>&lt;a href="./xxx.html"&gt;xxx&lt;/a&gt;</code> 中 <code>./xxx.html</code> 如果是外部链接需加入 <code>target="_blank"</code> ,例如： <code>&lt;a target="_blank" href="./xxx.html"&gt;xxx&lt;/a&gt;</code> </p>
+<h2 id="-">四、最后来两张好看的照片镇楼吧</h2>
+<p><img src="../img/焰灵姬5.jpg" alt="焰灵姬5"></p>
+<p><img src="../img/焰灵姬3.jpg" alt="焰灵姬3"></p>
+
+        </article>
+        </body>
+      </html>
+    
