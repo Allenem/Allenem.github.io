@@ -43,23 +43,33 @@
 <p>我的个人简介。</p>
 <h2 id="-">三、该博客项目简介</h2>
 <p>本博客是静态网页，没有前后端交互功能，仅仅作笔记展示使用。</p>
-<p>使用步骤如下，方便以后指导自己如何新添心得笔记：</p>
+<p>页面分三部分：左边菜单栏（手机是右上角下拉菜单），页底部分，主体部分（采用iframe标签套用HTML文件）。</p>
+<p>当然如果你想套用我的模板也行，直接拿去用就好。（LICENSE：<a href="../LICENSE">MIT</a>）</p>
+<p>使用步骤如下，方便以后指导自己添加心得笔记：</p>
+<hr>
 <ul>
-<li>1.在 <code>./Notebooks</code> 文件夹下新建 <code>markdown</code> 文件；</li>
-<li>2.拷贝文章内容，粘贴到<a href="https://allenem.github.io/md2HtmlOrPdf/index.html">该网址</a> 的 <code>input Markdown content</code> 区域，点击 <button>下载html</button> ；</li>
+<li>1.在 <code>./Notebooks</code> 文件夹下新建 <code>xxx.md</code> 文件；</li>
+<li>2.拷贝文章内容，粘贴到 <a target="_blank" href="https://allenem.github.io/md2HtmlOrPdf/index.html">该网址</a> 的 <code>input Markdown content</code> 区域，点击 <button> 下载html </button> ；</li>
 <li>3.将下载的 <code>index.html</code> 文件改名 <code>xxx.html</code> 移动到 <code>./Notebooks</code> 目录下;</li>
-<li><p>4.在 <code>./Notebooks/index.html</code> 的代码段①下面添加代码段②:</p>
+<li><p>4.将 <code>./Notebooks/xxx.html</code> 的 <strong>第9行</strong> 代码段①选择性改为代码段②（为了加载css文件快一点或者解决不能加载css样式问题）:</p>
 <p>  代码段①</p>
-<pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"./index.html"</span>&gt;</span>目录<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"https://blog-static.cnblogs.com/files/allenem/mycss.css"</span>&gt;</span>
 </code></pre>
 <p>  代码段①</p>
-<pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"./xxx.html"</span>&gt;</span>xxx<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"../CSS/mycss.css"</span>&gt;</span>
 </code></pre>
 </li>
-<li>5.大功告成。</li>
+<li><p>5.在 <code>./Pages/notebooks.html</code> 的 <strong>第28行</strong> 代码段③下面添加代码段④（目录页面添加条目）:</p>
+<p>  代码段③</p>
+<pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
+</code></pre>
+<p>  代码段④</p>
+<pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">target</span>=<span class="hljs-value">"_blank"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"../Notebooks/xxx.html"</span>&gt;</span>xxx<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+</code></pre>
+</li>
+<li>6.大功告成。</li>
 </ul>
-<p>♥ 注意1：<code>&lt;a href="./xxx.html"&gt;xxx&lt;/a&gt;</code> 中 <code>./xxx.html</code> 如果是外部链接需加入 <code>target="_blank"</code> ,例如： <code>&lt;a target="_blank" href="./xxx.html"&gt;xxx&lt;/a&gt;</code> </p>
-<p>♥ 注意2：<code>&lt;link rel="stylesheet" href="https://blog-static.cnblogs.com/files/allenem/mycss.css"&gt;</code> 可适当改为 <code>&lt;link rel="stylesheet" href="../CSS/mycss.css"&gt;</code> </p>
+<hr>
 <h2 id="-">四、最后来两张我老婆照片镇楼</h2>
 <p><img src="../img/焰灵姬5.jpg" alt="焰灵姬5"></p>
 <p><img src="../img/焰灵姬3.jpg" alt="焰灵姬3"></p>

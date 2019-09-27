@@ -23,7 +23,7 @@
         <article class="markdown-body">
           <h1 id="des-c-">DES算法的c++实现</h1>
 <blockquote>
-<p>项目地址：<a target="_blank" href="https://github.com/Allenem/introduction-of-information-security/tree/master/DES">https://github.com/Allenem/introduction-of-information-security/tree/master/DES</a></p>
+<p>项目地址：<a href="https://github.com/Allenem/introduction-of-information-security/tree/master/DES">https://github.com/Allenem/introduction-of-information-security/tree/master/DES</a></p>
 </blockquote>
 <h2 id="-">一、功能如下</h2>
 <ul>
@@ -34,9 +34,9 @@
 <li>[x] 其他任意键——退出</li>
 </ul>
 <h2 id="-des-">二、DES算法说明</h2>
-<p><a target="_blank" href="https://baike.baidu.com/item/des%E7%AE%97%E6%B3%95/10306073">参考百度百科</a></p>
+<p><a href="https://baike.baidu.com/item/des%E7%AE%97%E6%B3%95/10306073">参考百度百科</a></p>
 <p>DES算法把64位的明文输入块变为64位的密文输出块，它所使用的密钥也是64位，整个算法的主流程图如下：</p>
-<p><img src="./img/DES/main.png" alt="主流程图"></p>
+<p><img src="../img/DES/main.png" alt="主流程图"></p>
 <h3 id="-ip-64bit-64bit-">置换规则表(IP)(64bit-&gt;64bit)</h3>
 <p>其功能是把输入的64位数据块按位重新组合，并把输出分为L0、R0两部分，每部分各长32位，其置换规则见下表：</p>
 <pre><code>58,50,42,34,26,18,10,2,60,52,44,36,28,20,12,4,
@@ -50,7 +50,7 @@
 38,6,46,14,54,22,62,30,37,5,45,13,53,21,61,29,
 36,4,44,12,52,20,60,28,35,3,43,11,51,19,59,27,
 34,2,42,10,50,18,58 26,33,1,41,9,49,17,57,25
-</code></pre><p><img src="./img/DES/ffun.png" alt="f函数"></p>
+</code></pre><p><img src="../img/DES/ffun.png" alt="f函数"></p>
 <h3 id="-e-32bit-48bit-">放大换位表(e盒)(32bit-&gt;48bit)</h3>
 <pre><code>32,1,2,3,4,5,4,5,6,7,8,9,8,9,10,11,
 12,13,12,13,14,15,16,17,16,17,18,19,20,21,20,21,
@@ -107,7 +107,7 @@
 2,8,24,14,32,27,3,9,19,13,30,6,22,11,4,25,
 </code></pre><h3 id="-">子密钥的算法</h3>
 <p>下面给出子密钥Ki（48bit）的生成算法</p>
-<p><img src="./img/DES/generateKEY.png" alt="子密钥生成算法图"></p>
+<p><img src="../img/DES/generateKEY.png" alt="子密钥生成算法图"></p>
 <p>从子密钥Ki的生成算法描述图中我们可以看到：初始Key值为64位，但DES算法规定，其中第8、16、......64位是奇偶校验位，不参与DES运算。故Key 实际可用位数便只有56位。即：经过缩小选择换位表1的变换后，Key 的位数由64 位变成了56位，此56位分为C0、D0两部分，各28位，然后分别进行第1次循环左移，得到C1、D1，将C1（28位）、D1（28位）合并得到56位，再经过缩小选择换位2，从而便得到了密钥K0（48位）。依此类推，便可得到K1、K2、......、K16，不过需要注意的是，16次循环左移对应的左移位数要依据下述规则进行：</p>
 <h3 id="-">循环左移位数</h3>
 <pre><code>1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1
@@ -190,15 +190,15 @@ int <span class="hljs-function">DES_encode_decode(string m,int choice)</span>
 <h3 id="4-">4.注意事项</h3>
 <p>♥ 注1：读写文件在txt文件夹中</p>
 <p>♥ 注2：暂时只实现了英文字符，数字的加密解密</p>
-<p>♥ 注3：好像<a href="main.cpp">main.cpp</a>汉字会乱码，源代码也保存到<a href="main.txt">main.txt</a>里了</p>
+<p>♥ 注3：好像<a href="https://github.com/Allenem/introduction-of-information-security/tree/master/DES/main.cpp">main.cpp</a>汉字会乱码，源代码也保存到<a href="https://github.com/Allenem/introduction-of-information-security/tree/master/DES/main.txt">main.txt</a>里了</p>
 <p>♥ 注4：IDE:Code::Blocks 17.12，防止乱码设置如下：Settings-&gt;Compiler settings-&gt;Other compiler options加入下面语句，utf-8不行就GBK</p>
 <pre><code><span class="hljs-attribute">-finput</span><span class="hljs-attribute">-charset</span><span class="hljs-subst">=</span>utf<span class="hljs-subst">-</span><span class="hljs-number">8</span>
 <span class="hljs-attribute">-fexec</span><span class="hljs-attribute">-charset</span><span class="hljs-subst">=</span>utf<span class="hljs-subst">-</span><span class="hljs-number">8</span>
 </code></pre><h2 id="-">四、运行截图</h2>
 <h3 id="terminal">terminal</h3>
-<p><img src="./img/DES/DES.png" alt="DES"></p>
+<p><img src="../img/DES/DES.png" alt="DES"></p>
 <h3 id="txt">txt</h3>
-<p><img src="./img/DES/txt.png" alt="txt"></p>
+<p><img src="../img/DES/txt.png" alt="txt"></p>
 
         </article>
         </body>

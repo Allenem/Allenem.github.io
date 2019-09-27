@@ -2,7 +2,7 @@
 
 - [学习笔记 GitHubNoteBook](https://github.com/Allenem/GitHubNoteBook)
 - [Mrkdown转HTML&PDF](https://github.com/Allenem/md2HtmlOrPdf)
-- [信息安全概论](https://github.com/Allenem/introduction-of-information-security)
+- [信息安全概论(DES,RSA)](https://github.com/Allenem/introduction-of-information-security)
 - [生成贡献者名单](https://github.com/Allenem/all-contributors-cli-test)
 - [数字信号处理课设回声&均衡器](https://github.com/Allenem/DSP-course-design)
 - [Vue学习](https://github.com/Allenem/VueDraft)
