@@ -3,7 +3,7 @@
         <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-        <title>GitHub Markdown CSS demo</title>
+        <title>home</title>
         <link rel="shortcut icon" href="https://avatars3.githubusercontent.com/u/33366355?s=40&v=3">
         <link rel="stylesheet" href="https://sindresorhus.com/github-markdown-css/github-markdown.css">
         <link rel="stylesheet" href="../CSS/mycss.css">
@@ -49,25 +49,33 @@
 <hr>
 <ul>
 <li>1.在 <code>./Notebooks</code> 文件夹下新建 <code>xxx.md</code> 文件；</li>
-<li>2.拷贝文章内容，粘贴到 <a target="_blank" href="https://allenem.github.io/md2HtmlOrPdf/index.html">该网址</a> 的 <code>input Markdown content</code> 区域，点击 <button> 下载html </button> ；</li>
+<li>2.拷贝文章内容，粘贴到 <a href="https://allenem.github.io/md2HtmlOrPdf/index.html">该网址</a> 的 <code>input Markdown content</code> 区域，点击 <button> 下载html </button> ；</li>
 <li>3.将下载的 <code>index.html</code> 文件改名 <code>xxx.html</code> 移动到 <code>./Notebooks</code> 目录下;</li>
-<li><p>4.将 <code>./Notebooks/xxx.html</code> 的 <strong>第9行</strong> 代码段①选择性改为代码段②（为了加载css文件快一点或者解决不能加载css样式问题）:</p>
+<li><p>4.将 <code>./Notebooks/xxx.html</code> 的 <strong>第6行</strong> 代码段①改为代码段②（修改标题）:</p>
 <p>  代码段①</p>
-<pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"https://blog-static.cnblogs.com/files/allenem/mycss.css"</span>&gt;</span>
+<pre><code class="lang-html">          <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>GitHub Markdown CSS demo<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
 </code></pre>
 <p>  代码段①</p>
+<pre><code class="lang-html">          <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>xxx<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
+</code></pre>
+</li>
+<li><p>5.将 <code>./Notebooks/xxx.html</code> 的 <strong>第9行</strong> 代码段③选择性改为代码段④（为了加载css文件快一点或者解决不能加载css样式问题）:</p>
+<p>  代码段③</p>
+<pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"https://blog-static.cnblogs.com/files/allenem/mycss.css"</span>&gt;</span>
+</code></pre>
+<p>  代码段④</p>
 <pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"../CSS/mycss.css"</span>&gt;</span>
 </code></pre>
 </li>
-<li><p>5.在 <code>./Pages/notebooks.html</code> 的 <strong>第28行</strong> 代码段③下面添加代码段④（目录页面添加条目）:</p>
-<p>  代码段③</p>
+<li><p>6.在 <code>./Pages/notebooks.html</code> 的 <strong>第28行</strong> 代码段⑤下面添加代码段⑥（目录页面添加条目）:</p>
+<p>  代码段⑤</p>
 <pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
 </code></pre>
-<p>  代码段④</p>
+<p>  代码段⑥</p>
 <pre><code class="lang-html">  <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">target</span>=<span class="hljs-value">"_blank"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"../Notebooks/xxx.html"</span>&gt;</span>xxx<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
 </code></pre>
 </li>
-<li>6.大功告成。</li>
+<li>7.大功告成。</li>
 </ul>
 <hr>
 <h2 id="-">四、最后来两张我老婆照片镇楼</h2>
