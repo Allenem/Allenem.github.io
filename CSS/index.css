@@ -24,6 +24,17 @@ nav{
 	display: none;
 }
 
+/* add img&music START */
+nav>img{
+	width:15vw;
+}
+
+nav>iframe{
+	height: 5vh;
+	width: 15vw;
+}
+/* add img&music END */
+
 nav>a>img{
 	border-radius: 50%;
 	width: 100px;
@@ -90,6 +101,24 @@ footer{
 		line-height: 7vh;
 		overflow-y: hidden;
 	}
+
+	/* add img&music START */
+	nav>img{
+		float: left;
+		height: 7vh;
+		width: 40vw;
+	}
+	
+	nav>iframe{
+		float: left;
+		height: 7vh;
+		width: 38vw;
+	}
+	
+	nav>a{
+		float: left;
+	}
+	/* add img&music END */
 
 	nav>a>img{
 		width: 7vh;
