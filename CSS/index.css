@@ -112,7 +112,7 @@ footer{
 	nav>iframe{
 		float: left;
 		height: 7vh;
-		width: 38vw;
+		width: calc( 100vw - 7vh - 40vw - 10vw );
 	}
 	
 	nav>a{
