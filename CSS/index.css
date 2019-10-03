@@ -93,7 +93,8 @@ footer{
 	height: 5vh;
 	line-height: 5vh;
 	color: #fff;
-	background-color: rgb(107,116,129);
+	background: url(../img/nav-bg.png) rgb(107,116,129) no-repeat; 
+	background-size: 100% 100%;
 	text-align: center;
 }
 
