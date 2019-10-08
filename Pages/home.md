@@ -43,45 +43,51 @@
 
 ---
 
-- 1.在 `./Notebooks` 文件夹下新建 `xxx.md` 文件；
-- 2.拷贝文章内容，粘贴到 [该网址](https://allenem.github.io/md2HtmlOrPdf/index.html) 的 `input Markdown content` 区域，点击 <button> 下载html </button> ；
-- 3.将下载的 `index.html` 文件改名 `xxx.html` 移动到 `./Notebooks` 目录下;
-- 4.将 `./Notebooks/xxx.html` 的 **第6行** 代码段①改为代码段②（修改标题）:
+- ~~1.在 `./Notebooks` 文件夹下新建 `xxx.md` 文件；~~
+- ~~2.拷贝文章内容，粘贴到 [该网址](https://allenem.github.io/md2HtmlOrPdf/index.html) 的 `input Markdown content` 区域，点击 <button> 下载html </button> ；~~
+- ~~3.将下载的 `index.html` 文件改名 `xxx.html` 移动到 `./Notebooks` 目录下;~~
+- ~~4.将 `./Notebooks/xxx.html` 的 **第6行** 代码段①改为代码段②（修改标题）:~~
 
-    代码段①
+    ~~代码段①~~
     ```html
             <title>GitHub Markdown CSS demo</title>
     ```
-    代码段①
+    ~~代码段②~~
     ```html
             <title>xxx</title>
     ```
-- 5.将 `./Notebooks/xxx.html` 的 **第9行** 代码段③选择性改为代码段④（为了加载css文件快一点或者解决不能加载css样式问题）:
+- ~~5.将 `./Notebooks/xxx.html` 的 **第9行** 代码段③选择性改为代码段④（为了加载css文件快一点或者解决不能加载css样式问题）:~~
 
-    代码段③
+    ~~代码段③~~
     ```html
     <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/allenem/mycss.css">
     ```
-    代码段④
+    ~~代码段④~~
     ```html
     <link rel="stylesheet" href="../CSS/mycss.css">
     ```
-- 6.在 `./Pages/notebooks.html` 的 **第28行** 代码段⑤下面添加代码段⑥（目录页面添加条目）:
+- ~~6.在 `./Pages/notebooks.html` 的 **第28行** 代码段⑤下面添加代码段⑥（目录页面添加条目）:~~
 
-    代码段⑤
+    ~~代码段⑤~~
     ```html
     <ul>
     ```
-    代码段⑥
+    ~~代码段⑥~~
     ```html
     <li><a target="_blank" href="../Notebooks/xxx.html">xxx</a></li>
     ```
-- 7.大功告成。
+- ~~7.大功告成。~~
+
+---
+
+<h3>后来我觉得以上过程过于繁琐，所以我将笔记新存到一个仓库了，直接查看更方便 \_(:з」∠)_</h3>
+
+https://github.com/Allenem/GitHubNoteBook/blob/master/README.md
 
 ---
 
 ## 四、最后来两张我老婆照片镇楼
 
-![焰灵姬5](./img/焰灵姬5.jpg)
+![焰灵姬5](../img/焰灵姬5.jpg)
 
-![焰灵姬3](./img/焰灵姬3.jpg)
+![焰灵姬3](../img/焰灵姬3.jpg)
